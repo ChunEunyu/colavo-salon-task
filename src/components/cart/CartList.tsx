@@ -8,20 +8,14 @@ interface IProps {
   cartDiscounts: CartDiscountsType;
 }
 
-function CartList({ cartItems, cartDiscounts } : IProps ) {
+function CartList({ cartItems, cartDiscounts }: IProps) {
   return (
     <div>
       {cartItems.map((item, index) => (
-        <CartItemCard 
-          key={index}
-          item={item}
-        />
+        <CartItemCard key={index} item={item} />
       ))}
       {cartDiscounts.map((discount, index) => (
-        <CartDiscountCard 
-          key={index}
-          discount={discount}
-        />
+        <CartDiscountCard key={index} discount={discount} />
       ))}
     </div>
   );

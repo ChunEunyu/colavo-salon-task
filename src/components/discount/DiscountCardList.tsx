@@ -5,16 +5,12 @@ import DiscountCard from './DiscountCard';
 interface IProps {
   discounts: Discounts;
 }
-  
+
 function DiscountCardList({ discounts }: IProps) {
   return (
-    <div className='pt-1 px-3'>
+    <div className="pt-1 px-3">
       {Object.entries(discounts).map(([key, discount], index) => (
-        <DiscountCard
-          key={index} 
-          discount={discount}
-          discountKey={key}
-        />
+        <DiscountCard key={index} discount={discount} discountKey={key} />
       ))}
     </div>
   );

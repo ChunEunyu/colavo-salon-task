@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react'
-import { fetchList } from './api'
+import { useEffect, useState } from 'react';
+import { fetchList } from './api';
 
-import Layout from './common/Layout'
-import MenuSection from './components/cart/MenuSection'
-import './App.css'
-import { Data } from './types'
-import CartList from './components/cart/CartList'
-import TotalCart from './components/cart/TotalCart'
-import { useCurrencyStore } from './stores/currencyCodeStroe'
-import { useCartStore } from './stores/cartStore'
+import Layout from './common/Layout';
+import MenuSection from './components/cart/MenuSection';
+import './App.css';
+import { Data } from './types';
+import CartList from './components/cart/CartList';
+import TotalCart from './components/cart/TotalCart';
+import { useCurrencyStore } from './stores/currencyCodeStroe';
+import { useCartStore } from './stores/cartStore';
 
 function App() {
   const [data, setData] = useState<Data | null>(null);
-  
+
   const { cartItems, cartDiscounts } = useCartStore();
   const { setCurrencyCode } = useCurrencyStore();
 
   const fetchData = async (): Promise<void> => {
     const fetchedData = await fetchList();
-    setCurrencyCode(fetchedData.currency_code)
+    setCurrencyCode(fetchedData.currency_code);
     setData(fetchedData);
   };
 
@@ -28,18 +28,13 @@ function App() {
 
   return (
     <Layout>
-      <MenuSection 
-        data={data} 
-      />
-      <div className='h-3/4 overflow-y-auto mb-3 mt-1'> 
-        <CartList 
-          cartItems={cartItems}
-          cartDiscounts={cartDiscounts}
-        />
+      <MenuSection data={data} />
+      <div className="h-3/4 overflow-y-auto mb-3 mt-1">
+        <CartList cartItems={cartItems} cartDiscounts={cartDiscounts} />
       </div>
       <TotalCart />
     </Layout>
-  )
+  );
 }
 
-export default App
+export default App;

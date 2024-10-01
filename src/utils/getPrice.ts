@@ -1,12 +1,12 @@
-import { Items, CartDiscountsType } from "../types";
+import { Items, CartDiscountsType } from '../types';
 
-/** 
+/**
  * 할인이 적용되지 않은 전체 가격을 계산
  */
 export function getTotalPrice(items: Items[]): number {
   return items.reduce((sum, item) => {
     const product = Object.values(item)[0];
-    return sum + (product.count * product.price);
+    return sum + product.count * product.price;
   }, 0);
 }
 
@@ -15,21 +15,21 @@ export function getTotalPrice(items: Items[]): number {
  */
 export function getDiscountedPrice(items: Items[], discounts: CartDiscountsType): number {
   let totalDiscount = 0;
-  
-  discounts.forEach(discount => {
+
+  discounts.forEach((discount) => {
     const discountValue = Object.values(discount)[0]; // 할인 정보
-  
-    discountValue.list.forEach(itemKey => {
-    // items 배열에서 해당 itemKey에 해당하는 item을 찾아 할인 적용
-    const item = items.find(item => Object.keys(item)[0] === itemKey);
-    if (item) {
-      const product = Object.values(item)[0];
-      const itemTotal = product.count * product.price;
-      totalDiscount += itemTotal * discountValue.rate;
-    }
+
+    discountValue.list.forEach((itemKey) => {
+      // items 배열에서 해당 itemKey에 해당하는 item을 찾아 할인 적용
+      const item = items.find((item) => Object.keys(item)[0] === itemKey);
+      if (item) {
+        const product = Object.values(item)[0];
+        const itemTotal = product.count * product.price;
+        totalDiscount += itemTotal * discountValue.rate;
+      }
     });
   });
-  
+
   return totalDiscount;
 }
 
