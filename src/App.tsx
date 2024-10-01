@@ -1,34 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
+import { fetchList } from './api'
+
+import Layout from './common/Layout'
+import MenuSection from './components/cart/MenuSection'
 import './App.css'
+import { Data } from './types'
+import CartList from './components/cart/CartList'
+import TotalCart from './components/cart/TotalCart'
+import { useCurrencyStore } from './stores/currencyCodeStroe'
+import { useCartStore } from './stores/cartStore'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [data, setData] = useState<Data | null>(null);
+  
+  const { cartItems, cartDiscounts } = useCartStore();
+  const { setCurrencyCode } = useCurrencyStore();
+
+  const fetchData = async (): Promise<void> => {
+    const fetchedData = await fetchList();
+    setCurrencyCode(fetchedData.currency_code)
+    setData(fetchedData);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Layout>
+      <MenuSection 
+        data={data} 
+      />
+      <div className='h-3/4 overflow-y-auto mb-3 mt-1'> 
+        <CartList 
+          cartItems={cartItems}
+          cartDiscounts={cartDiscounts}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <TotalCart />
+    </Layout>
   )
 }
 
