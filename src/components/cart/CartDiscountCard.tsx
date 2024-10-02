@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCartStore } from '../../stores/cartStore';
 import { useCurrencyStore } from '../../stores/currencyCodeStroe';
 import { CartDiscountObject, CartDiscount } from '../../types';
@@ -16,11 +16,8 @@ function CartDiscountCard({ discount }: IProps) {
   const { cartItems, cartDiscounts, setCartDiscounts } = useCartStore();
   const { currencyCode } = useCurrencyStore();
 
-  // 할인이 적용된 상품 정보 리스트
-  const discountedList = value.list.map((key) => {
-    const foundProduct = cartItems.find((item) => Object.keys(item)[0] === key);
-    return foundProduct ?? {};
-  });
+  // 총 할인 금액 계산
+  const totalDiscounts = getDiscountedPrice(cartItems, [discount]);
 
   // 할인이 적용된 상품 이름 및 수량 리스트
   const discountedOptions = cartItems.map((item) => {
@@ -32,14 +29,11 @@ function CartDiscountCard({ discount }: IProps) {
     };
   });
 
-  const totalDiscounts = getDiscountedPrice(discountedList, [discount]);
-
   // 할인 상품 선택 드롭다운
   const discountedNameWithCountArray = discountedOptions.map((item) => Object.values(item)[0]);
   const discountedKeys = discountedOptions.map((item) => Object.values(item)[1]);
   const [selectedTags, setSelectedTags] = useState<string[]>(discountedKeys);
 
-  // 드롭다운 선택에 대한 change
   const handleChange = (value: string[]) => {
     setSelectedTags(value);
 
@@ -57,6 +51,11 @@ function CartDiscountCard({ discount }: IProps) {
 
     setCartDiscounts(updatedData);
   };
+
+  // 장바구니에 아이템이 삭제되었을 때 드롭다운 셀렉트 옵션에도 반영되도록
+  useEffect(() => {
+    setSelectedTags(discountedKeys);
+  }, [discountedKeys]);
 
   return (
     <div>
