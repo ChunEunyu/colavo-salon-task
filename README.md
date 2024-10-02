@@ -1,50 +1,40 @@
-# React + TypeScript + Vite
+# 콜라보 살롱 프론트엔드 과제
+결제 아이템을 장바구니에 담고 결제 금액을 계산하는 기능입니다. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+## 설치 및 실행
 ```
+### 설치
+npm install
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react';
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-});
+### 실행
+npm run dev
 ```
+## 기술 선택 및 이유
+- React: 컴포넌트 기반의 UI 라이브러리로, 재사용성을 높이며 다양한 플러그인 및 도구를 사용할 수 있어 선택했습니다. 
+
+- TypeScript: 타입 오류를 사전에 방지하고 프로그램의 안정성을 높이기 위해 사용했습니다.
+
+- TailwindCSS: 커스터마이징이 용이하고 빠르게 UI를 구성할 수 있어 선택했습니다. 
+
+- Vite: Vite는 빠른 개발 환경을 제공하는 빌드 도구로, React와 TypeScript를 사용할 때 SWC(빠른 자바스크립트 컴파일러)를 함께 사용했습니다. 
+
+- Zustand: 상태 관리 라이브러리로, 작은 번들 사이즈 및 Redux에 비해 보일러 플레이트 코드가 적고, Context API에 비해 렌더링 최적화가 적용된다는 장점이 있습니다. 
+
+- Ant Design: UI 디자인 라이브러리로, 드롭 다운을 구현할 때 사용하여 UI 컴포넌트를 쉽게 구현하는 데에 도움받았습니다.
+
+## 요구 사항 체크 리스트
+- [x] `item`(eg. 여성컷)과 `discount`(eg. 지인 할인)는 각각 장바구니로 추가/삭제가 가능
+
+- [x] 동일한 아이템을 장바구니로 담을 수 없음
+
+- [x] `item`의 수량 선택 가능 (eg. 여성컷 x 3)
+
+- [x] `discount`의 할인 대상인 `item`을 선택하지 않으면 장바구니에 담긴 모든 `item`에 할인을 적용
+
+- [x] `discount`의 할인 대상을 선택한 경우 선택한 `item`만 할인 적용 가능
+
+- [x] 장바구니에 담긴 내용이 변경될 때 마다 사용자에게 최종 금액을 표시
+
+- [x] 최종 금액은 `currency_code`에 따라 표시.(eg. `KRW`: 30,000원)
+
+
