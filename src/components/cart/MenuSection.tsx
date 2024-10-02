@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { Data } from '../../types';
 import MenuBtns from './MenuBtns';
 import DiscountModal from '../discount/DiscountModal';
 import MenuListModal from '../menuList/MenuListModal';
-import { Data } from '../../types';
 
 interface IProps {
   data: Data | null;

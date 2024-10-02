@@ -1,9 +1,8 @@
 import React from 'react';
 import { FaPlus, FaXmark } from 'react-icons/fa6';
-import ModalLayout from '../../common/ModalLayout';
 import { Items } from '../../types';
 import ItemCardList from './ItemCardList';
-import NextBtn from '../../common/NextBtn';
+import ModalLayout from '../../common/ModalLayout';
 
 interface IProps {
   items: Items;

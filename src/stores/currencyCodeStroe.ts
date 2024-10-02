@@ -8,5 +8,5 @@ interface CurrencyState {
 
 export const useCurrencyStore = create<CurrencyState>((set) => ({
   currencyCode: '',
-  setCurrencyCode: (code: string) => set({ currencyCode: code }), // 매개변수 타입 명시
+  setCurrencyCode: (code: string) => set({ currencyCode: code }), 
 }));

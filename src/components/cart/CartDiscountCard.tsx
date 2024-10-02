@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useCartStore } from '../../stores/cartStore';
 import { useCurrencyStore } from '../../stores/currencyCodeStroe';
 import { CartDiscountObject, CartDiscount } from '../../types';

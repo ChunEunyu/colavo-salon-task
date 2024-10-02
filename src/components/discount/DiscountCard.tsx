@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import CheckIcon from '../../common/CheckIcon';
 import { Discount } from '../../types';
 import { useCartStore } from '../../stores/cartStore';
+import CheckIcon from '../../common/CheckIcon';
 
 interface IProps {
   discount: Discount;
