@@ -1,7 +1,7 @@
 import React from 'react';
-import CartItemCard from './CartItemCard';
 import { CartItemsType, CartDiscountsType } from '../../types';
 import CartDiscountCard from './CartDiscountCard';
+import CartItemCard from './CartItemCard';
 
 interface IProps {
   cartItems: CartItemsType;

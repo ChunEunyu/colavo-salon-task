@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { fetchList } from './api';
-
-import Layout from './common/Layout';
-import MenuSection from './components/cart/MenuSection';
-import './App.css';
 import { Data } from './types';
-import CartList from './components/cart/CartList';
-import TotalCart from './components/cart/TotalCart';
 import { useCurrencyStore } from './stores/currencyCodeStroe';
 import { useCartStore } from './stores/cartStore';
+import Layout from './common/Layout';
+import MenuSection from './components/cart/MenuSection';
+import CartList from './components/cart/CartList';
+import TotalCart from './components/cart/TotalCart';
+import './App.css';
 
 function App() {
   const [data, setData] = useState<Data | null>(null);

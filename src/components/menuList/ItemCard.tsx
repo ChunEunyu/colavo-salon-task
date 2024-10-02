@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { getFormatPrice } from '../../utils/getFormatPrice';
 import { Item, Items } from '../../types';
+import { getFormatPrice } from '../../utils/getFormatPrice';
 import { useCurrencyStore } from '../../stores/currencyCodeStroe';
 import { useCartStore } from '../../stores/cartStore';
 import CheckIcon from '../../common/CheckIcon';

@@ -1,9 +1,7 @@
 import React from 'react';
-import Header from '../../common/Header';
-import ItemCardList from '../menuList/ItemCardList';
 import { FaPlus, FaXmark } from 'react-icons/fa6';
-import ModalLayout from '../../common/ModalLayout';
 import { Discounts } from '../../types';
+import ModalLayout from '../../common/ModalLayout';
 import DiscountCardList from './DiscountCardList';
 
 interface IProps {
