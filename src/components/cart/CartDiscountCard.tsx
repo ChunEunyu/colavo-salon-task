@@ -30,9 +30,13 @@ function CartDiscountCard({ discount }: IProps) {
   });
 
   // 할인 상품 선택 드롭다운
-  const discountedNameWithCountArray = discountedOptions.map((item) => Object.values(item)[0]);
   const discountedKeys = discountedOptions.map((item) => Object.values(item)[1]);
   const [selectedTags, setSelectedTags] = useState<string[]>(discountedKeys);
+
+  // 선택한 항목에 대한 레이블 이름 배열 eg. ['남성컷', '드라이']
+  const selectedLabels = discountedOptions
+    .filter(option => selectedTags.includes(option.value))
+    .map(option => option.label);
 
   const handleChange = (value: string[]) => {
     setSelectedTags(value);
@@ -52,17 +56,14 @@ function CartDiscountCard({ discount }: IProps) {
     setCartDiscounts(updatedData);
   };
 
-  // 장바구니에 아이템이 삭제되었을 때 드롭다운 셀렉트 옵션에도 반영되도록
-  useEffect(() => {
-    setSelectedTags(discountedKeys);
-  }, [discountedKeys]);
-
   return (
     <div>
       <div className="flex justify-between items-center my-4 mx-1">
         <div>
           <p className="font-semibold text-purple-gray leading-tight">{value.name}</p>
-          <p className="text-[0.8rem] text-deep-gray">{discountedNameWithCountArray.join(', ')}</p>
+          <p className="text-[0.8rem] text-deep-gray">
+            {selectedLabels.join(', ')}
+          </p>
           <p className="text-sm text-deep-pink font-semibold">
             -{getFormatPrice(totalDiscounts, currencyCode)}
             {`(${(value.rate * 100).toFixed(0)}%)`}
